@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Cake with Confetti & Sliding Images</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: pink;
+            overflow: hidden;
+            position: relative;
+        }
+        .confetti {
+            width: 15px;
+            height: 10px;
+            border-radius: 50%;
+            position: absolute;
+            animation: fall 5s linear infinite;
+            z-index: 5;
+        }
+        @keyframes fall {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 1; }
+        }
+        .photo {
+            position: absolute;
+            border-radius: 10%;
+            width: 30vw;
+            height: 70vh;
+            object-fit: cover;
+            top: 50%;
+            left: 100%;
+            transform: translateY(-50%);
+            animation: slide 3s linear forwards;
+        }
+        @keyframes slide {
+            0% { left: 100%; opacity: 1; }
+            50% { left: 70%; opacity: 1; }
+            75% { left: 25%; opacity: 0.8; }
+            100% { left: -20%; opacity: 0; }
+        }
+        /* Birthday message container */
+        .birthday-message {
+      font-size: 2vw;
+      font-weight: bold;
+      color: white;
+      text-shadow: 2px 2px 5px black;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 80%;
+      text-align: center;
+      position: absolute;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+  <div class="birthday-message" id="birthdayText"></div>
+
+  <script>
+    const text = `<h1>Happy Birthday Sushmi 🎂🎉</h1> <br>
+    Thanks for coming in my life<br>
+    I just wanted to remind you how deeply I love you<br>
+    You’re my best friend, my partner, and my greatest love<br>
+    You’re not only beautiful on the outside but even more so in your heart<br>
+    You are like the sun that brightens my days and the stars that guide me through the night<br>
+    Loving you is the best thing I’ve ever done, and I’ll never stop finding new ways to show you just how much you mean to me<br>
+    Every day I wake up grateful that you chose me<br>
+    I’m so excited to spend the rest of my life with you<br>
+    You’re my favorite person, my forever crush, and the love of my life`;
+
+    let index = 0;
+    let displayText = '';
+
+    function typeText() {
+      if (index < text.length) {
+        // Handle <br> tag as one chunk
+        if (text.substr(index, 4) === "<br>") {
+          displayText += "<br>";
+          index += 4;
+        } else {
+          displayText += text.charAt(index);
+          index++;
+        }
+
+        document.getElementById("birthdayText").innerHTML = displayText;
+        setTimeout(typeText, 50); // Typing speed
+      }
+    }
+
+    setTimeout(typeText, 500);
+
+
+function getRandomColor() {
+    let letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) { // Ensure 6-character hex code
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+function createConfetti() {
+    let confetti = document.createElement("div");
+    confetti.classList.add("confetti");
+    confetti.style.left = Math.random() * window.innerWidth + "px";
+    confetti.style.top = "-10px"; // Start from above the screen
+    confetti.style.background = getRandomColor();
+    document.body.appendChild(confetti);
+    
+    setTimeout(() => confetti.remove(), 5000); // Match animation duration
+}
+
+setInterval(createConfetti, 100);
+
+
+        let lastIndex = -1; // Store the last used index
+
+function createPhoto() {
+    let photo = document.createElement("img");
+    photo.classList.add("photo");
+
+    let randomIndex;
+    do {
+        randomIndex = Math.floor(Math.random() * 3) + 1; // Assuming 10 images
+    } while (randomIndex === lastIndex); // Ensure it's not the same as the last one
+
+    lastIndex = randomIndex; // Update last index
+    photo.src = `/photo/photosl${randomIndex}.jpg`; // Adjust path accordingly
+
+    document.body.appendChild(photo);
+    
+    setTimeout(() => photo.remove(), 5000);
+}
+
+setInterval(createPhoto, 1000);
+
+
+
+        setInterval(createConfetti, 100);
+        setInterval(createPhoto, 2000);
+    </script>
+</body>
+</html>

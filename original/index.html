@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(90deg, purple, silver);
+            background-size: 200% 200%;
+            animation: gradientAnimation 4s infinite alternate;
+        }
+        @keyframes gradientAnimation {
+            0% {
+                background-position: left top;
+            }
+            100% {
+                background-position: right bottom;
+            }
+        }
+        .container {
+            text-align: center;
+            /* background: white; */
+            height: 10vw;
+            width: 80vw;
+            /* padding: 20px; */
+            border-radius: 10px;
+            /* border: 2px solid red; */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .container p{
+            font-size:3vw;
+            /* border: 2px solid red; */
+            color: aliceblue;
+        }
+        input {
+            padding: 10px;
+             margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            height: 3vw;
+            width: 50vw;
+            font-size: 2vw;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            background: blue;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            height: 3vw;
+            width: 20vw;
+           font-size: 2vw;
+           margin-top: 1.5vw;
+        }
+        @media(max-height:300px){
+            .container{
+                height: 10vh;
+                width: 80vw;
+                margin: 2vh;
+                /* padding: 2vh; */
+
+            }
+            .container p{
+                
+                /* margin: 2vh; */
+                font-size: 2vw;
+            }
+            input{
+                font-size: 2vw;
+                margin: 2vh;
+            }
+            button{
+                height: 3vh;
+                width: 20vh;
+                margin: 2vh;
+                font-size: 2vw;
+            }
+            body{
+                margin: 2vh;
+                padding: 2vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p>Enter Password</p>
+        <input type="password" id="password" placeholder="Enter your fav person dob...(DDMMMYYYY)">
+        <br>
+        <button onclick="checkPassword()">Login</button>
+        <p id="error" style="color: red; display: none;">Incorrect Password!</p>
+    </div>
+
+    <script>
+        function checkPassword() {
+            var password = document.getElementById("password").value;
+            var correctPassword = "31082000"; // Change this to any password you want
+            
+            if (password === correctPassword) {
+                window.location.href = "partytest.html";
+            } else {
+                document.getElementById("error").style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
