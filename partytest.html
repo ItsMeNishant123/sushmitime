@@ -132,7 +132,7 @@ function createPhoto() {
     } while (randomIndex === lastIndex); // Ensure it's not the same as the last one
 
     lastIndex = randomIndex; // Update last index
-    photo.src = `/photo/photosl${randomIndex}.jpg`; // Adjust path accordingly
+    photo.src = `photo/photosl${randomIndex}.jpg`; // Adjust path accordingly
 
     document.body.appendChild(photo);
     
